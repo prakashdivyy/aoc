@@ -37,6 +37,7 @@ func main() {
 	}
 
 	solvePartOne(leftArray, rightArray)
+	solvePartTwo(leftArray, rightArray)
 }
 
 func solvePartOne(l []int, r []int) {
@@ -54,6 +55,27 @@ func solvePartOne(l []int, r []int) {
 	}
 
 	fmt.Printf("[Part One] Total: %d\n", total)
+}
+
+func solvePartTwo(l []int, r []int) {
+	leftArray := sortArray(l)
+	rightArray := sortArray(r)
+
+	total := 0
+
+	rightMap := make(map[int]int)
+
+	for i := 0; i < len(rightArray); i++ {
+		rightMap[rightArray[i]]++
+	}
+
+	for i := 0; i < len(leftArray); i++ {
+		if rightMap[leftArray[i]] > 0 {
+			total += leftArray[i] * rightMap[leftArray[i]]
+		}
+	}
+
+	fmt.Printf("[Part Two] Total: %d\n", total)
 }
 
 func sortArray(arr []int) []int {
